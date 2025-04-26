@@ -1,7 +1,6 @@
 # LAHACKS2025
 
-instruction to hill:
-how to run:
+how to run just backend:
 ```
 source ./.venv/bin/activate
 python3 main.py

@@ -1,60 +1,64 @@
-import requests
-
-
-from langchain_openai import ChatOpenAI
-from browser_use import Agent
+import os
 import asyncio
+import requests
 from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from browser_use import Agent
+
 load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+LINKD_API_KEY  = os.getenv("LINKD_API_KEY")
+if not GEMINI_API_KEY:
+    raise RuntimeError("GEMINI_API_KEY not set in environment")
+if not LINKD_API_KEY:
+    raise RuntimeError("LINKD_API_KEY not set in environment")
 
-API_BASE_URL = 'https://search.linkd.inc/api'
-API_KEY = 'lk_a49cef94184e4f2385a170ae3640e8d1'
+os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 
+API_BASE_URL = "https://search.linkd.inc/api"
 HEADERS = {
-	'Content-Type': 'application/json',
-	'Authorization': f'Bearer {API_KEY}',
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {LINKD_API_KEY}",
 }
 
 def search_users(query, limit=10, school=None):
-	"""
-	Search users via the Linkd API.
-	:param query: The search query string.
-	:param limit: Number of results to return.
-	:param school: List of school names (optional).
-	:return: JSON response from the API.
-	"""
-	params = {
-		'query': query,
-		'limit': limit,
-	}
-	if school:
-		# requests supports lists for repeated query params
-		params['school'] = school
+    params = {"query": query, "limit": limit}
+    if school:
+        params["school"] = school
+    resp = requests.get(f"{API_BASE_URL}/search/users", headers=HEADERS, params=params)
+    resp.raise_for_status()
+    return resp.json()
 
-	url = f"{API_BASE_URL}/search/users"
-	response = requests.get(url, headers=HEADERS, params=params)
-	if response.status_code == 401:
-		raise Exception("Invalid or expired API key")
-	response.raise_for_status()
-	return response.json()
+async def run_browser_use_agent(task_statement: str):
+    # 3) Instantiate with model_name (and your key will be picked up from GOOGLE_API_KEY)
+    # model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
+    model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
 
-async def run_browser_use_agent(task_Statement):
-	agent = Agent(
-		task=task_Statement,
-		llm=ChatOpenAI(model="gpt-4o"),
-	)
-	await agent.run()
+    agent = Agent(task=task_statement, llm=model) 
+    #agent.slow_mo = 500                          # slow things down so tabs have time to load
 
-# Example usage:
+    await agent.run()
+
 if __name__ == "__main__":
-	try:
-		print("Searching...")
-		result = search_users("People working on AI at FAANG", limit=5, school="University of California, Los Angeles")
-		url = []
-		for user in result["results"]:
-			url.append(user["experience"][0]["company_name"])
-		task_statement = f"Go and find internships at these companies {url}. Just tell me which internships are available. My linkedin is chaimongkol@ucla.edu, password is Flames133_"
-		print(task_statement)
-		asyncio.run(run_browser_use_agent(task_statement))
-	except Exception as e:
-		print("Error:", e)
+    try:
+        data = search_users(
+            "People working on AI at FAANG",
+            limit=5,
+            school="University of California, Los Angeles"
+        )
+        company_names = [
+            u["experience"][0]["company_name"]
+            for u in data.get("results", [])
+            if u.get("experience")
+        ]
+        task = (
+            "Send a connection request to the people found. Go find current internship listings at these companies: "
+            + ", ".join(company_names)
+            + ". My LinkedIn is linkedinpremiumdemo@gmail.com, password is Linkedindemo26. "
+            + "Just tell me which internships are available."
+        )
+        print("Prompt →", task)
+        asyncio.run(run_browser_use_agent(task))
+
+    except Exception as e:
+        print("Error:", e)
