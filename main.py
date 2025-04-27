@@ -90,10 +90,11 @@ def serve_static(path):
 @app.route('/submit', methods=['POST'])
 def submit_form():
     form_data = request.json
+    print(form_data)
     print("Received form data:", form_data)
     
     # Process the form data
-    open_sesame()
+    open_sesame(form_data["experienceLevel"], form_data["industry"], form_data["userPreferences"])
     
     return jsonify({"status": "success", "message": "Form data processed"})
 
@@ -103,10 +104,10 @@ def start_server():
     webbrowser.open(f'http://localhost:{port}')
     app.run(host='localhost', port=port, debug=True)
 
-def open_sesame():
+def open_sesame(experienceLevel, industry, userPreferences):
     print("Searching...")
     data = search_users(
-        "People working on AI at FAANG",
+        f"People who work at {industry} industry and have {experienceLevel} experience.",
         limit=5,
         school="University of California, Los Angeles"
     )
@@ -120,14 +121,15 @@ def open_sesame():
             urls.append(user["profile"]["linkedin_url"])
 
     companies_str = ",".join(companies)
-
     url_str       = ",".join(urls)
+    print(companies_str)
 
     profile = "Rahut Taeudomkul (rahut@ucla.edu, 310-696-8877) is a UCLA Chemical and Biomolecular Engineering student (GPA 3.82, major GPA 3.96) with internships at TSMC (incoming), Innobic (strategy), and Benchmark Electronics (product engineering), research experience in machine learning droplet analysis at Peterson Research Group, leadership roles at AIChE UCLA, a publication in Molecules (2021) on liquid crystals, technical projects in carbon capture, process engineering, and Arduino device building, and skills in Python, C++, CAD, MATLAB, LaTeX, Excel, with awards including LA Tech Week Hackathon finalist and placements in international math and economics competitions."
 
     task_statement_1 = (
         f"Login to LinkedIn and send a personalized connection request to the people found whose profile URLs are [{url_str}]. "
         "Create a personalized message that links our personal experience to their own experience in their latest company and politely ask for a referral."
+        f"my profile is {profile}"
         "My LinkedIn is linkedinpremiumdemo@gmail.com and password is Linkedindemo26. "
         "Make sure to click the 'Sign in with Google' button instead of the default LinkedIn form. "
     )
@@ -137,17 +139,16 @@ def open_sesame():
         f"Go find any job at [ Rockstar ]. Go into their careers page."
         "Once you found one. APPLY TO IT."
         "No need to find a relevant job. Just find any job. in any place in the world." 
-        f"my profile is {profile}"
+        f"my profile is {profile} mention a lot about my past projects specifically"
         "not a veteran. not disabled. asian, male. If there are no questions about this, just skip it. If there is a submit button, click it."
     )
 
     async def main():
         print(task_statement_1)
-        #t1 = asyncio.create_task(run_browser_use_agent(task_statement_1))
+        t1 = asyncio.create_task(run_browser_use_agent(task_statement_1))
         print(task_statement_2)
         t2 = asyncio.create_task(run_browser_use_agent(task_statement_2))
-        #await asyncio.gather(t1, t2)
-        await asyncio.gather(t2)
+        await asyncio.gather(t1, t2)
 
     asyncio.run(main())
 
