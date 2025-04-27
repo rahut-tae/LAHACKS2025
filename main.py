@@ -1,11 +1,15 @@
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import webbrowser
 import os
 import asyncio
 import requests
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from browser_use import Agent
-import socket
 import threading
+import json
+from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 
 
 load_dotenv()
@@ -17,6 +21,10 @@ if not LINKD_API_KEY:
     raise RuntimeError("LINKD_API_KEY not set in environment")
 
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+
+# Create Flask app
+app = Flask(__name__, static_folder='.')
+CORS(app)  # Enable CORS for all routes
 
 API_BASE_URL = "https://search.linkd.inc/api"
 HEADERS = {
@@ -57,31 +65,45 @@ def handle_client(conn, addr):
             data = conn.recv(1024)
             if not data:
                 break
-            # Echo back for now - modify as needed
-            conn.send(data)
-        except:
+            # Parse the received JSON data
+            form_data = data.decode('utf-8')
+            print("Received form data:", form_data)
+            
+            # Here you can process the form data and trigger open_sesame()
+            open_sesame()
+            
+            # Send success response back
+            response = "Form data processed successfully"
+            conn.send(response.encode('utf-8'))
+        except Exception as e:
+            print(f"Error processing request: {e}")
             break
     conn.close()
 
-def start_server():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    port = 8505
-    server.bind((socket.gethostname(),port))
-    server.listen(5)
-    print(f"Server listening on port {port}")
+# Serve static files (HTML, CSS, etc.)
+@app.route('/', defaults={'path': 'index.html'})
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('.', path)
+
+# Handle form submission
+@app.route('/submit', methods=['POST'])
+def submit_form():
+    form_data = request.json
+    print("Received form data:", form_data)
     
-    while True:
-        conn, addr = server.accept()
-        thread = threading.Thread(target=handle_client, args=(conn, addr))
-        thread.daemon = True
-        thread.start()
+    # Process the form data
+    open_sesame()
+    
+    return jsonify({"status": "success", "message": "Form data processed"})
 
-# Start socket server in background thread
-server_thread = threading.Thread(target=start_server)
-server_thread.daemon = True
-server_thread.start()
+def start_server():
+    port = 8000  # Use a single port for everything
+    print(f"Server listening on http://localhost:{port}")
+    webbrowser.open(f'http://localhost:{port}')
+    app.run(host='localhost', port=port, debug=True)
 
-if __name__ == "__main__":
+def open_sesame():
     print("Searching...")
     data = search_users(
         "People working on AI at FAANG",
@@ -101,7 +123,7 @@ if __name__ == "__main__":
 
     url_str       = ",".join(urls)
 
-    profile = "Chaidhat Chaimongkol | (424) 535-9679 | chaimongkol@ucla.edu | linkedin.com/in/chaidhat | github.com/chaidhat | UCLA B.S. in Computer Engineering, Minor in Entrepreneurship (Dean’s List 2x, Boeing Scholarship 2023-24), graduating June 2026. Founder of Scholarity Co., Ltd., building a full-stack E-Learning platform (Dart, React, TypeScript, MySQL) with 50,000+ lines, securing a Fortune 500 client and generating $12,000 revenue in year one; optimized backend performance by 7,200%; Google-backed hackathon finalist. Undergraduate Researcher at Di Carlo Lab, creating Python front-ends and Wi-Fi/Bluetooth robotic systems exhibited at SLAS 2025; and at Yijia Xiao Lab, building LLM-based financial trading analysis with LangChain and Model Control Protocol. Software Engineering Intern at PTG Energy Group and Software Engineer for Department of Industrial Works, architecting fleet/E-Learning web apps and safety checklist platforms (Dart, Flutter, NodeJS, MySQL) under a $119k contract. Leadership: Led 20-engineer Brain-Computer Interface team for EEG signal ML prototypes (California Neurotech Conference 2024) and commanded 18 engineers in UCLA’s Bruin Spacecraft Group for CubeSat software/hardware (C, Python, F Prime, PCB soldering). Avionics engineer at UCLA Rocket Project building electronic systems. Projects include building a C programming language compiler (x86-64 assembly) and a Boeing 777-300ER flight simulator (50,000+ downloads, Boeing Scholarship). Skills: C, C++, C#, Python, Java, HTML/CSS, JavaScript, TypeScript, React, SQL, Dart; PyTorch, TensorFlow, NodeJS, NextJS, Flask, Flutter, LangChain; Git, Docker, AWS, Figma, Linux; coursework in OS, Algorithms, Theoretical CS, Computer Vision ML, Electromagnetics, x86 assembly, Statistics, and Circuits."
+    profile = "Rahut Taeudomkul (rahut@ucla.edu, 310-696-8877) is a UCLA Chemical and Biomolecular Engineering student (GPA 3.82, major GPA 3.96) with internships at TSMC (incoming), Innobic (strategy), and Benchmark Electronics (product engineering), research experience in machine learning droplet analysis at Peterson Research Group, leadership roles at AIChE UCLA, a publication in Molecules (2021) on liquid crystals, technical projects in carbon capture, process engineering, and Arduino device building, and skills in Python, C++, CAD, MATLAB, LaTeX, Excel, with awards including LA Tech Week Hackathon finalist and placements in international math and economics competitions."
 
     task_statement_1 = (
         f"Login to LinkedIn and send a personalized connection request to the people found whose profile URLs are [{url_str}]. "
@@ -128,3 +150,6 @@ if __name__ == "__main__":
         await asyncio.gather(t2)
 
     asyncio.run(main())
+
+if __name__ == "__main__":
+    start_server()

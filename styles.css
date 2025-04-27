@@ -1,0 +1,348 @@
+/* Base styles */
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #202124;
+    line-height: 1.5;
+    background-color: #F9FAFB;
+}
+
+h1, h2, h3, h4, h5, h6, p, label, select, textarea, button, input {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+/* Navigation styles */
+nav {
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero section styles */
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, #f8f9fa, #e9ecef);
+}
+
+/* Custom colors */
+.bg-primary { background-color: #5E60CE; }
+.bg-secondary { background-color: #48CAE4; }
+.text-primary { color: #0F172A; }
+.text-secondary { color: #94A3B8; }
+
+/* CTA Button */
+#openSesameBtn {
+    background-color: #3B82F6;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+    font-family: 'Roboto', sans-serif;
+}
+
+#openSesameBtn:hover {
+    background-color: #2563eb;
+    box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.3);
+}
+
+#openSesameBtn:active {
+    transform: scale(0.98);
+}
+
+/* Search input styles */
+#searchInput, #searchInput:focus {
+    box-shadow: none;
+    border: none;
+}
+
+/* Custom styles */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Feature cards */
+.feature-card {
+    transition: transform 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Quick links */
+.quick-link {
+    transition: all 0.2s ease;
+}
+
+.quick-link:hover {
+    background-color: #f8f9fa;
+}
+
+/* Results section */
+#searchResults {
+    transition: all 0.3s ease;
+}
+
+.result-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    transition: all 0.2s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(32, 33, 36, 0.28);
+}
+
+/* Quick filters */
+.quick-filters button {
+    transition: all 0.2s ease;
+}
+
+.quick-filters button:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+/* Job card styles */
+.job-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading animation */
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    #searchForm {
+        padding: 0 1rem;
+    }
+    
+    .quick-filters {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .bg-white.rounded-2xl.shadow-lg {
+        padding: 1.5rem !important;
+    }
+    .resume-upload {
+        height: 120px;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dadce0;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bdc1c6;
+}
+
+/* Mobile menu styles */
+#mobileMenu {
+    transition: all 0.3s ease-in-out;
+}
+
+#mobileMenu.hidden {
+    display: none;
+}
+
+/* Animation classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #1a73e8;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1557b0;
+    transform: translateY(-1px);
+}
+
+/* Footer styles */
+footer {
+    background-color: #f8f9fa;
+}
+
+footer a {
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #1a73e8;
+}
+
+/* User Preferences Section */
+#userPreferences {
+    transition: all 0.2s ease;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#userPreferences:focus {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: transparent;
+}
+
+/* Resume Upload Section */
+.resume-upload {
+    transition: all 0.2s ease;
+}
+
+.resume-upload:hover {
+    border-color: #3B82F6;
+    background-color: #f8f9fa;
+}
+
+.resume-upload.dragover {
+    border-color: #3B82F6;
+    background-color: #eff6ff;
+}
+
+/* File Input Styles */
+input[type="file"] {
+    display: none;
+}
+
+/* Upload Icon Animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.resume-upload svg {
+    animation: bounce 2s infinite;
+}
+
+/* Card styles */
+.bg-white.rounded-2xl.shadow-lg {
+    box-shadow: 0 4px 24px 0 rgba(31, 41, 55, 0.08), 0 1.5px 4px 0 rgba(31, 41, 55, 0.04);
+    border-radius: 1.25rem;
+    background-color: #fff;
+}
+
+/* Dropdown styles */
+select {
+    background-color: #F9FAFB;
+    color: #202124;
+    border: 1px solid #e5e7eb;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+select:focus {
+    border-color: #3B82F6;
+    outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    #userPreferences {
+        min-height: 80px;
+    }
+    
+    .resume-upload {
+        height: 120px;
+    }
+}
+
+/* Custom select styles */
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    color: #202124;
+    font-size: 1rem;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: none;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+.custom-select:focus {
+    border-color: #4285F4;
+    box-shadow: 0 0 0 2px #4285F4;
+    outline: none;
+}
+.custom-select-wrapper {
+    transition: box-shadow 0.2s;
+}
+.custom-select-wrapper:focus-within {
+    box-shadow: 0 0 0 2px #4285F4;
+    border-radius: 0.75rem;
+}
+.custom-chevron {
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+.custom-select:focus + .custom-chevron,
+.custom-select-wrapper:focus-within .custom-chevron {
+    transform: rotate(180deg);
+}
+
+/* Remove default arrow for all browsers */
+.custom-select::-ms-expand {
+    display: none;
+}
+
+/* Smooth expand/collapse animation for dropdown (limited by browser, but chevron animates) */ 
