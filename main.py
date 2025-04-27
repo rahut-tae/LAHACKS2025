@@ -110,8 +110,9 @@ if __name__ == "__main__":
         "Make sure to click the 'Sign in with Google' button instead of the default LinkedIn form. "
     )
 
+    # acceptable companies: rockstar, acorn
     task_statement_2 = (
-        f"Go find any job at [Acorns]. Go into their careers page."
+        f"Go find any job at [ Rockstar ]. Go into their careers page."
         "Once you found one. APPLY TO IT."
         "No need to find a relevant job. Just find any job. in any place in the world." 
         f"my profile is {profile}"
