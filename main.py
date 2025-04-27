@@ -32,10 +32,15 @@ def search_users(query, limit=10, school=None):
 async def run_browser_use_agent(task_statement: str):
     # 3) Instantiate with model_name (and your key will be picked up from GOOGLE_API_KEY)
     # model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
-    model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
-
+    model = ChatGoogleGenerativeAI(model="gemini-2.5-pro-preview-03-25")
     agent = Agent(task=task_statement, llm=model) 
-    #agent.slow_mo = 500                          # slow things down so tabs have time to load
+    agent.slow_mo = 500                          # slow things down so tabs have time to load
+    credentials={
+        "google.com": {
+            "username": "linkedinpremiumdemo@gmail.com",
+            "password": "Linkedindemo26"
+        }
+    }
 
     await agent.run()
 
@@ -54,7 +59,7 @@ if __name__ == "__main__":
         task = (
             "Send a connection request to the people found. Go find current internship listings at these companies: "
             + ", ".join(company_names)
-            + ". My LinkedIn is linkedinpremiumdemo@gmail.com, password is Linkedindemo26. "
+            + ". My LinkedIn is linkedinpremiumdemo@gmail.com and password is Linkedindemo26 "
             + "Just tell me which internships are available."
         )
         print("Prompt →", task)
