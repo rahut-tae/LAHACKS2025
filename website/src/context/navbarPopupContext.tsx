@@ -19,9 +19,9 @@ export const PopupContext = createContext<PopupContextType>({
   isPopupVisible: false,
   togglePopup: () => { },
   isLanguagePopupOpen: false,
-  setIsLanguagePopupOpen: (isLanguagePopup: boolean) => { },
+  setIsLanguagePopupOpen: () => { },
   isLanguagePopupHidden: true,
-  setIsLanguagePopupHidden: (isLanguagePopup: boolean) => { },
+  setIsLanguagePopupHidden: () => { },
 });
 
 // Provider Component
@@ -31,8 +31,8 @@ export function PopupProvider({ children }: { children: ReactNode }) {
   const [isLanguagePopupOpen, setIsLanguagePopupOpen] = useState(false);
   const [isLanguagePopupHidden, setIsLanguagePopupHidden] = useState(true);
 
-  let isPopupShown = useRef(false);
-  let popupState = useRef(0);
+  const isPopupShown = useRef(false);
+  const popupState = useRef(0);
 
   const handlePopupState = () => {
     switch (popupState.current) {

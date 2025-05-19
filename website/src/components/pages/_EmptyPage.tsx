@@ -1,9 +1,7 @@
 "use client";
 import { SaraburiTypography } from "@/components";
-import { useTranslation } from "@/hooks/useTranslation";
 
 export default function MyPage() {
-	const { t } = useTranslation(); // Access toggle from the provider
 
   return (
     <div className="items-center justify-items-center p-4 mt-20 md:p-8 pb-20 gap-16 font-[family-name:var(--font-jakarta-sans)] bg-background">
@@ -15,13 +13,13 @@ export default function MyPage() {
               variant="h4" 
               className="my-2 text-center"
             >
-              {t.terms_smallHeader}
+              Small Header
             </SaraburiTypography>
             <SaraburiTypography 
               variant="h1" 
               className="my-4 text-center"
             >
-              {t.terms_title}
+              Title
             </SaraburiTypography>
           </div>
         </section>
