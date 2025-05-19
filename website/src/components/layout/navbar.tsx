@@ -92,16 +92,7 @@ export default function Navbar() {
 							href={"/"}
 							className="flex w-48 items-center"
 						>
-							<img
-								className="block dark:hidden w-24 h-8"
-								src="/assets/schols-logo.png"
-								alt="trusted by"
-							/>
-							<img
-								className="hidden dark:block w-24 h-8"
-								src="/assets/schols-logo-darkmode.png"
-								alt="trusted by"
-							/>
+							Open Sesame
 						</a>
 						<div className="flex-1 flex justify-center mt-[0.5rem] items-center">
 							<ul className="hidden md:flex gap-x-1">

@@ -4,17 +4,17 @@ import SaraburiSpinner from './saraburiSpinner';
 function getButtonStyle(style: number, className?: string) {
   switch (style) {
     case 0:
-      return `rounded-full border border-solid border-transparent transition-colors inline-flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 mr-4 ${className || ''}`;
+      return `rounded-full border border-solid border-transparent transition-colors inline-flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 mr-4 ${className || ''}`;
     case 1:
-      return `rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors inline-flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44 mr-4 ${className || ''}`;
+      return `rounded-full border border-solid border-black/[.08] transition-colors inline-flex items-center justify-center hover:bg-[#f2f2f2] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44 mr-4 ${className || ''}`;
     case 2:
-      return `rounded-lg transition-colors inline-flex items-center justify-center hover:bg-[#00000010] dark:hover:bg-[#1a1a1a] hover:border-transparent sm:min-w-24 text-sm font-medium h-10 ${className || ''}`;
+      return `rounded-lg transition-colors inline-flex items-center justify-center hover:bg-[#00000010] hover:border-transparent sm:min-w-24 text-sm font-medium h-10 ${className || ''}`;
     case 3:
-      return `rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#000000c0] dark:hover:bg-[#ffffffc0] hover:border-transparent bg-foreground text-background text-sm pl-6 pr-4 h-10 ${className || ''}`;
+      return `rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#000000c0] hover:border-transparent bg-foreground text-background text-sm pl-6 pr-4 h-10 ${className || ''}`;
     case 4:
-      return `rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#c0c0c0c0] dark:hover:bg-[#505050c0] hover:border-transparent bg-[#eeeeeeff] dark:bg-[#303030ff] text-sm pl-6 pr-4 h-10 ${className || ''}`;
+      return `rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#c0c0c0c0]  hover:border-transparent bg-[#eeeeeeff]  text-sm pl-6 pr-4 h-10 ${className || ''}`;
     case 5:
-      return `rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#f0f0f0f0] dark:hover:bg-[#505050c0] hover:border-transparent bg-[#ffffffff] dark:bg-[#303030ff] text-sm pl-6 pr-6 h-10 ${className || ''}`;
+      return `rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#f0f0f0f0]  hover:border-transparent bg-[#ffffffff] text-sm pl-6 pr-6 h-10 ${className || ''}`;
   }
 }
 

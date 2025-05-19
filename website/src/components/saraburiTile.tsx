@@ -5,7 +5,7 @@ export default function SaraburiTile({ variant, className, title, description, s
   switch(variant) {
     case 1:
       return <a 
-        className={`relative p-4 md:p-8 rounded-lg bg-white dark:bg-neutral-900 transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#222] ${className || ''}`}
+        className={`relative p-4 md:p-8 rounded-lg bg-white  transition-colors hover:bg-[#f2f2f2] ${className || ''}`}
         href="https://scholarity.io/app/#"
         target="_blank"
         rel="noopener noreferrer"
@@ -28,7 +28,7 @@ export default function SaraburiTile({ variant, className, title, description, s
         throw new Error("Invalid SaraburiTile: src is required for variant 2");
       }
       return <a
-        className={`relative p-0 rounded-lg bg-white dark:bg-neutral-900 aspect-[3/4] w-full transition-opacity duration-300 hover:opacity-70 ${className || ''}`}
+        className={`relative p-0 rounded-lg bg-white  aspect-[3/4] w-full transition-opacity duration-300 hover:opacity-70 ${className || ''}`}
         href="https://scholarity.io/app/#"
         target="_blank"
         rel="noopener noreferrer"

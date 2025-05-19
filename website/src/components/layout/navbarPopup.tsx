@@ -84,12 +84,12 @@ export default function NavbarPopup() {
           className={`absolute top-3 left-6 w-48 transition-all duration-500 ${isPopupOpen ? "opacity-100" : "opacity-0"}`}
         >
           <img
-            className="block dark:hidden w-24 h-8"
+            className="block  w-24 h-8"
             src="/assets/schols-logo.png"
             alt="trusted by"
           />
           <img
-            className="hidden dark:block w-24 h-8"
+            className="hidden w-24 h-8"
             src="/assets/schols-logo-darkmode.png"
             alt="trusted by"
           />

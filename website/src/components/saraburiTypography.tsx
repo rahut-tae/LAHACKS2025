@@ -14,7 +14,7 @@ export default function SaraburiTypography({
       >{children}</h1>);
     case "h1a":
       return (<h1
-      className={`text-5xl md:text-7xl font-medium ${className || ''}`}
+      className={`text-3xl md:text-7xl font-medium ${className || ''}`}
       >{children}</h1>);
     case "h2":
       return (<h1

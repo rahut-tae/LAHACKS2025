@@ -78,7 +78,7 @@ export default function ContactForm() {
 
           {!loading && <button 
             type="submit" 
-            className="w-32 rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#000000c0] dark:hover:bg-[#ffffffc0] hover:border-transparent bg-foreground text-background text-sm pl-6 pr-4 h-10"
+            className="w-32 rounded-full transition-colors inline-flex items-center justify-center hover:bg-[#000000c0] hover:border-transparent bg-foreground text-background text-sm pl-6 pr-4 h-10"
         >
           Submit
             <HiArrowRight className="w-6 h-6 pl-1"/>
