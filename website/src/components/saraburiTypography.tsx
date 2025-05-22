@@ -10,7 +10,7 @@ export default function SaraburiTypography({
   switch(variant) {
     case "h1":
       return (<h1
-      className={`text-3xl md:text-5xl font-medium ${className || ''}`}
+      className={`text-3xl md:text-[2.5rem] font-medium ${className || ''}`}
       >{children}</h1>);
     case "h1a":
       return (<h1

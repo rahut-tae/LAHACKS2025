@@ -60,7 +60,7 @@ export default function HomePage() {
               variant="h1" 
               className="pb-8 md:text-left text-center"
             >
-              <p>One Resume. A Thousand Doors.</p>
+              <p>One Resume.<br/>A Thousand Doors.</p>
             </SaraburiTypography>
             <p>Open Sesame is a fully autonomous job application platform powered by AI agents. Just upload your resume and set preferences — it applies to jobs 24/7 in the background while you focus on interviews and networking.</p>
             <br />
