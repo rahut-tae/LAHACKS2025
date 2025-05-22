@@ -65,13 +65,6 @@ export default function ContactForm() {
             inputValue={formData.name}
             inputOnChange={handleChange}
           ></SaraburiFormInput>
-          <SaraburiFormInput
-            formInputType={SaraburiFormInputType.TEXTAREA}
-            labelName="Message"
-            id="message"
-            inputValue={formData.message}
-            inputOnChange={handleChange}
-          ></SaraburiFormInput>
 
           {true && <p className="text-red-500">{error}</p>}
           {loading && <SaraburiSpinner />}

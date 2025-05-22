@@ -27,7 +27,7 @@ export default function SaraburiFormInput({
                     name={id}
                     value={inputValue}
                     onChange={inputOnChange}
-                    className="w-full h-12 p-3 border  bg-background rounded-lg outline-none focus:ring-0 focus:border-gray-500 focus:border-2 transition-border duration-300"
+                    className="w-full h-12 p-3 bg-[#f8f8f8] border border-neutral-300 rounded-lg outline-none focus:ring-0 focus:border-gray-500 focus:border-2 transition-border duration-300"
                 />
             </>;
         case SaraburiFormInputType.TEXTAREA:
@@ -38,7 +38,7 @@ export default function SaraburiFormInput({
                     name={id}
                     value={inputValue}
                     onChange={inputOnChange}
-                    className="w-full h-12 p-3 border  bg-background rounded-lg outline-none focus:ring-0 focus:border-gray-500 focus:border-2 transition-border duration-300"
+                    className="w-full h-32 p-3 bg-[#f8f8f8] border border-neutral-300 rounded-lg outline-none focus:ring-0 focus:border-gray-500 focus:border-2 transition-border duration-300"
                 />
             </>;
         case SaraburiFormInputType.PASSWORD:
@@ -50,7 +50,7 @@ export default function SaraburiFormInput({
                     name={id}
                     value={inputValue}
                     onChange={inputOnChange}
-                    className="w-full h-12 p-3 border  bg-background rounded-lg outline-none focus:ring-0 focus:border-gray-500 focus:border-2 transition-border duration-300"
+                    className="w-full h-12 p-3 bg-[#f8f8f8] border border-neutral-300 rounded-lg outline-none focus:ring-0 focus:border-gray-500 focus:border-2 transition-border duration-300"
                 />
             </>;
     }

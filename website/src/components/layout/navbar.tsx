@@ -1,12 +1,13 @@
 "use client";
-import { SaraburiButtonHref, SaraburiButtonClickable } from "@/components";
+//import { SaraburiButtonHref, SaraburiButtonClickable } from "@/components";
 import { useState, useEffect, useRef } from 'react';
-import { HiBars3 } from "react-icons/hi2";
-import { usePopup } from "@/hooks/usePopup";
+//import { HiBars3 } from "react-icons/hi2";
+//import { usePopup } from "@/hooks/usePopup";
+import Image from "next/image";
 
 export default function Navbar() {
 	const [isAtTop, setIsAtTop] = useState(true);
-	const { togglePopup } = usePopup(); // Access toggle from the provider
+	//const { togglePopup } = usePopup(); // Access toggle from the provider
 	const mouseEnteredDropdown = useRef(false);
 	const lockDropdown = useRef(false);
 	const dropdownState = useRef(0);
@@ -86,14 +87,21 @@ export default function Navbar() {
 	return (
 		<>
 			<div className={`fixed top-0 z-10 w-screen`}>
-				<nav className={`flex flex-col w-full md:px-10 px-6 backdrop-blur-2xl font-[family-name:var(--font-jakarta-sans)] justify-start items-center transition-all duration-500 ease-in-out overflow-hidden ${isAtTop ? "bg-background" : "bg-background/50"} ${isDropdownOpen ? "h-[12rem] border-b border-neutral-300" : "h-14"}`}>
+				<nav className={`flex flex-col w-full md:px-10 px-6 backdrop-blur-2xl font-[family-name:var(--font-jakarta-sans)] justify-start items-center transition-all duration-500 ease-in-out overflow-hidden ${isAtTop ? "bg-[#f8f8f8]" : "bg-background/50"} ${isDropdownOpen ? "h-[12rem] border-b border-neutral-300" : "h-14"}`}>
 					<div className="flex container mx-auto max-w-screen-xl">
 						<a
 							href={"/"}
 							className="flex w-48 items-center"
 						>
-							Open Sesame
+							<Image
+								height={90}
+								width={90}
+								src="/assets/logo.png"
+								alt="Open Sesame"
+								className="mt-2 md:ml-4"
+							/>
 						</a>
+						{/*
 						<div className="flex-1 flex justify-center mt-[0.5rem] items-center">
 							<ul className="hidden md:flex gap-x-1">
 								<li className="relative" onMouseEnter={handleMouseEnterSolutions} onMouseLeave={handleMouseLeaveSolutions}>
@@ -112,6 +120,7 @@ export default function Navbar() {
 						<button className="flex md:hidden mt-7" onClick={togglePopup}>
 							<HiBars3 className="w-7 h-7 -translate-y-1/2" />
 						</button>
+						*/}
 					</div>
 
 					{/* Solutions dropdown */}

@@ -1,10 +1,11 @@
 "use client";
 import { SaraburiTypography, SaraburiButtonHref } from "@/components";
+import ContactForm from "@/components/layout/contactForm";
 
 export default function HomePage() {
 
   return (
-    <div className="items-center justify-items-center min-h-screen mt-20 pb-20 p-4 gap-16 md:p-8 font-[family-name:var(--font-jakarta-sans)] bg-background">
+    <div className="items-center justify-items-center min-h-screen pt-20 pb-20 p-4 gap-16 md:px-8 font-[family-name:var(--font-jakarta-sans)] bg-[#f8f8f8]">
       <main className="flex flex-col gap-8 items-center">
         {/* section 1 */}
         <section className="grid grid-cols-12 gap-y-4 md:gap-y-8 p-2 max-w-screen-xl">
@@ -20,7 +21,7 @@ export default function HomePage() {
                 Join Now
               </SaraburiButtonHref>
             </div>
-            <div className="flex justify-center md:justify-start items-center mt-20">
+            <div className="flex justify-center md:justify-start items-center mt-7 md:mt-20">
               <p>3rd Place at</p>
               <img
                 className=" w-12 mx-2 rounded-lg" 
@@ -29,9 +30,9 @@ export default function HomePage() {
               />
             </div>
           </div>
-          <div className="col-start-1 md:col-start-7 col-span-full md:col-span-7 relative overflow-visible w-full mt-10">
+          <div className="col-start-1 md:col-start-7 col-span-full md:col-span-7 w-full mt-5 md:mt-10 w-full">
             <img
-              className="absolute inset-0 rounded-lg" 
+              className="w-full h-auto rounded-lg" 
               src="/assets/hero-4.png" 
               alt="Hero picture" 
             />
@@ -64,6 +65,18 @@ export default function HomePage() {
           </div>
             */}
 
+        </section>
+        <section className="grid grid-cols-12 gap-y-4 md:gap-y-8 p-8 max-w-screen-xl bg-white rounded-lg w-full">
+          <div className="col-span-full md:col-start-5 md:col-span-4 md:my-18">
+            <SaraburiTypography 
+              variant="h1" 
+              className="pb-8 md:text-left text-center"
+            >
+              <p>Join the Waitlist</p>
+            </SaraburiTypography>
+            <p>We promise to not spam you and only send you relevant updates. Your data will be used purely for this waitlist.</p>
+            <ContactForm />
+          </div>
         </section>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
