@@ -62,9 +62,9 @@ export default function HomePage() {
             >
               <p>One Resume. A Thousand Doors.</p>
             </SaraburiTypography>
-            <p>OpenSesame is a fully autonomous job application platform powered by AI agents. Just upload your resume and set preferences — it applies to jobs 24/7 in the background while you focus on interviews and networking.</p>
-            <br/>
-            <p>Networking mode automatically researches and composes messages to recruiters and hiring managers in your industry. You&apos;re 4 to 10 times more likely to get an offer this way.<sup>1</sup></p>
+            <p>Open Sesame is a fully autonomous job application platform powered by AI agents. Just upload your resume and set preferences — it applies to jobs 24/7 in the background while you focus on interviews and networking.</p>
+            <br />
+            <p>Networking mode automatically researches and composes personalized messages to recruiters and hiring managers in your industry. You&apos;re up to 10 times more likely to get an offer this way.<sup>1</sup></p>
             <br/>
             <br/>
             <SaraburiButtonClickable
@@ -89,7 +89,7 @@ export default function HomePage() {
             >
               Watch it in action
             </SaraburiTypography>
-            <p className="text-center mb-8">Demo of the prototype OpenSesame agent in action. Not representative of the final product.</p>
+            <p className="text-center mb-8">Demo of the prototype Open Sesame agent in action. Not representative of the final product.</p>
             <div className="relative w-full aspect-video">
               <iframe
                 className="absolute top-0 left-0 w-full h-full rounded-lg"
