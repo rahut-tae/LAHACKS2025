@@ -86,8 +86,8 @@ export default function Navbar() {
 
 	return (
 		<>
-			<div className={`fixed top-0 z-10 w-screen`}>
-				<nav className={`flex flex-col w-full md:px-10 px-6 backdrop-blur-2xl font-[family-name:var(--font-jakarta-sans)] justify-start items-center transition-all duration-500 ease-in-out overflow-hidden ${isAtTop ? "bg-[#f8f8f8]" : "bg-background/50"} ${isDropdownOpen ? "h-[12rem] border-b border-neutral-300" : "h-14"}`}>
+			<div className={`fixed top-0 z-16 w-screen`}>
+				<nav className={`flex flex-col w-full md:px-10 px-6 backdrop-blur-2xl font-[family-name:var(--font-jakarta-sans)] justify-start items-center transition-all duration-500 ease-in-out overflow-hidden border border-neutral-200 ${isAtTop ? "bg-[#f8f8f8]" : "bg-background/50"} ${isDropdownOpen ? "h-[12rem] border-b border-neutral-300" : "h-16"}`}>
 					<div className="flex container mx-auto max-w-screen-xl">
 						<a
 							href={"/"}
@@ -98,12 +98,12 @@ export default function Navbar() {
 								width={90}
 								src="/assets/logo.png"
 								alt="Open Sesame"
-								className="mt-2 md:ml-4"
+								className="mt-[.7rem] md:ml-4"
 							/>
 						</a>
             <SaraburiButtonClickable
               style={3}
-			  className="ml-auto mt-2"
+			  className="ml-auto mt-[.7rem]"
               onClick={() => {
                 window.scrollTo({
                   top: document.documentElement.scrollHeight,
