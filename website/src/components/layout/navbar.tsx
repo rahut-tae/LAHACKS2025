@@ -1,5 +1,5 @@
 "use client";
-//import { SaraburiButtonHref, SaraburiButtonClickable } from "@/components";
+import { SaraburiButtonClickable } from "@/components";
 import { useState, useEffect, useRef } from 'react';
 //import { HiBars3 } from "react-icons/hi2";
 //import { usePopup } from "@/hooks/usePopup";
@@ -101,6 +101,18 @@ export default function Navbar() {
 								className="mt-2 md:ml-4"
 							/>
 						</a>
+            <SaraburiButtonClickable
+              style={3}
+			  className="ml-auto mt-2"
+              onClick={() => {
+                window.scrollTo({
+                  top: document.documentElement.scrollHeight,
+                  behavior: 'smooth'
+                });
+              }}
+            >
+				Sign up
+            </SaraburiButtonClickable>
 						{/*
 						<div className="flex-1 flex justify-center mt-[0.5rem] items-center">
 							<ul className="hidden md:flex gap-x-1">

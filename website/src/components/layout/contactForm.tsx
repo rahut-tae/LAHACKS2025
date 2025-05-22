@@ -27,7 +27,7 @@ export default function ContactForm() {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://server-singapore.scholarity.io/submit-contact-form?contactFormData=${encodeURIComponent(
+        `https://server-singapore.scholarity.io/open-sesame-submit-contact-form?contactFormData=${encodeURIComponent(
           JSON.stringify(formData)
         )}`
       );
@@ -53,16 +53,16 @@ export default function ContactForm() {
         <form id="contactForm" onSubmit={handleSubmit} className="flex flex-col gap-4">
           <SaraburiFormInput
             formInputType={SaraburiFormInputType.TEXT}
-            labelName="Email"
-            id="email"
-            inputValue={formData.email}
+            labelName="Your Name"
+            id="name"
+            inputValue={formData.name}
             inputOnChange={handleChange}
           ></SaraburiFormInput>
           <SaraburiFormInput
             formInputType={SaraburiFormInputType.TEXT}
-            labelName="Name"
-            id="name"
-            inputValue={formData.name}
+            labelName="Your Email"
+            id="email"
+            inputValue={formData.email}
             inputOnChange={handleChange}
           ></SaraburiFormInput>
 
