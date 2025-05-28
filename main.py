@@ -4,7 +4,7 @@ import os
 import asyncio
 import requests
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from browser_use import Agent
 import threading
 import json
@@ -13,14 +13,14 @@ from flask_cors import CORS
 
 
 load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 LINKD_API_KEY  = os.getenv("LINKD_API_KEY")
-if not GEMINI_API_KEY:
-    raise RuntimeError("GEMINI_API_KEY not set in environment")
+if not OPENAI_API_KEY:
+    raise RuntimeError("OPENAI_API_KEY not set in environment")
 if not LINKD_API_KEY:
     raise RuntimeError("LINKD_API_KEY not set in environment")
 
-os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+os.environ["GOOGLE_API_KEY"] = OPENAI_API_KEY
 
 # Create Flask app
 app = Flask(__name__, static_folder='.')
@@ -41,9 +41,8 @@ def search_users(query, limit=10, school=None):
     return resp.json()
 
 async def run_browser_use_agent(task_statement: str):
-    # 3) Instantiate with model_name (and your key will be picked up from GOOGLE_API_KEY)
-    # model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
-    model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
+    # Use OpenAI's ChatGPT model
+    model = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
     agent = Agent(
         task=task_statement, 
         llm=model,
@@ -106,49 +105,53 @@ def start_server():
 
 def open_sesame(experienceLevel, industry, userPreferences):
     print("Searching...")
-    data = search_users(
-        f"People who work at {industry} industry and have {experienceLevel} experience.",
-        limit=5,
-        school="University of California, Los Angeles"
-    )
+    # data = search_users(
+    #     f"People who work at {industry} industry and have {experienceLevel} experience.",
+    #     limit=5,
+    #     school="University of California, Los Angeles"
+    # )
 
-    companies = []
-    urls = []
-    for user in data.get("results", []):
-        for experience in user.get("experience"):
-            companies.append(experience["company_name"])
-        if user.get("profile"):
-            urls.append(user["profile"]["linkedin_url"])
+    # companies = []
+    # urls = []
+    # for user in data.get("results", []):
+    #     for experience in user.get("experience"):
+    #         companies.append(experience["company_name"])
+    #     if user.get("profile"):
+    #         urls.append(user["profile"]["linkedin_url"])
 
-    companies_str = ",".join(companies)
-    url_str       = ",".join(urls)
-    print(companies_str)
+    # companies_str = ",".join(companies)
+    # url_str       = ",".join(urls)
+    # print(companies_str)
 
-    profile = "Rahut Taeudomkul (rahut@ucla.edu, 310-696-8877) is a UCLA Chemical and Biomolecular Engineering student (GPA 3.82, major GPA 3.96) with internships at TSMC (incoming), Innobic (strategy), and Benchmark Electronics (product engineering), research experience in machine learning droplet analysis at Peterson Research Group, leadership roles at AIChE UCLA, a publication in Molecules (2021) on liquid crystals, technical projects in carbon capture, process engineering, and Arduino device building, and skills in Python, C++, CAD, MATLAB, LaTeX, Excel, with awards including LA Tech Week Hackathon finalist and placements in international math and economics competitions."
+    profile = "Logan Reyes – reyes@ucla.edu - +4245359679 - no website- Software Engineer with 3+ years of experience in C++, Unreal Engine, and networked multiplayer systems; contributed to modding communities for GTA V and RDR2; built proprietary AI-driven NPC behavior tools; B.S. in Computer Science from University of Texas at Austin; former gameplay programmer intern at Insomniac Games; passionate about open-world design, procedural generation, and real-time physics simulation; fluent in Python, Lua, and low-level engine debugging."
 
     task_statement_1 = (
-        f"Login to LinkedIn and send a personalized connection request to the people found whose profile URLs are [{url_str}]. "
-        "Create a personalized message that links our personal experience to their own experience in their latest company and politely ask for a referral."
+        f"Login to LinkedIn and "
+        "1. search for a recruiter who works at Google."
+        "2. click into their profile. Scroll down on their profile and memorize something they did."
+        "2. send a personalized connection request to them. Use their experience and tie it in with yours somehow. Lie if you need to. IT MUST NOT EXCEED 200 CHARACTERS."
         f"my profile is {profile}"
-        "My LinkedIn is linkedinpremiumdemo@gmail.com and password is Linkedindemo26. "
+        "Do not connect with Fernando."
+        "My LinkedIn is linkedinpremiumdemo@gmail.com and password is Linkedindemo26."
         "Make sure to click the 'Sign in with Google' button instead of the default LinkedIn form. "
     )
 
     # acceptable companies: rockstar, acorn
     task_statement_2 = (
         f"Go find any job at [ Rockstar ]. Go into their careers page."
-        "Once you found one. APPLY TO IT."
+        "Once you found a mid-level job. APPLY TO IT."
         "No need to find a relevant job. Just find any job. in any place in the world." 
+        "For the 'Rockstar Games Application/Data Privacy Consent' -> put in 'I Have Read'"
+        "You can work anywhere."
         f"my profile is {profile} mention a lot about my past projects specifically"
         "not a veteran. not disabled. asian, male. If there are no questions about this, just skip it. If there is a submit button, click it."
     )
 
     async def main():
-        print(task_statement_1)
-        t1 = asyncio.create_task(run_browser_use_agent(task_statement_1))
+        #print(task_statement_1)
+        #t1 = asyncio.create_task(run_browser_use_agent(task_statement_1))
         print(task_statement_2)
         t2 = asyncio.create_task(run_browser_use_agent(task_statement_2))
-        await asyncio.gather(t1, t2)
 
     asyncio.run(main())
 
